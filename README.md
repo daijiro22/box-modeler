@@ -112,8 +112,7 @@ cd box-modeler
 ```
 box-modeler/
 ├── index.html         # メインアプリ
-├── README.md          # この説明書
-└── screenshot.png     # スクリーンショット（任意）
+└── README.md          # この説明書
 ```
 
 ---
