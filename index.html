@@ -99,8 +99,19 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        // 最新のBabel(CDN)は既定でJSXを「自動ランタイム」で変換し、出力先頭に
+        //   import { jsx } from "react/jsx-runtime";
+        // を注入する。これを通常scriptとして実行すると
+        //   Cannot use import statement outside a module
+        // で全停止する。React(UMDグローバル)を使う構成なので classic ランタイムを
+        // 明示したpresetを登録して回避する（Babelのバージョンに依存しない）。
+        Babel.registerPreset('react-classic', {
+            presets: [[Babel.availablePresets.react, { runtime: 'classic' }]],
+        });
+    </script>
 
-    <script type="text/babel">
+    <script type="text/babel" data-presets="react-classic">
         const { useState, useEffect, useRef } = React;
 
         function App() {
